@@ -1,0 +1,7 @@
+/* src/App.css */
+.glow-border {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: linear-gradient(#000, #000) padding-box,
+              linear-gradient(90deg, #ff00ff, #00ffff, #0000ff) border-box;
+}

@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- NEW THEME: CHARCOAL & AMBER --- */
+
+@layer base {
+  html { 
+    scroll-behavior: smooth; 
+  }
+  /* 1. Changed to a deep charcoal background with light text */
+  body {
+    @apply font-sans text-zinc-200 bg-zinc-900 min-h-screen;
+  }
+}
+
+@layer components {
+  /* 2. Solid charcoal cards with a subtle border */
+  .glass {
+    @apply bg-zinc-800/50 border border-zinc-700 rounded-xl shadow-lg;
+  }
+  /* 3. Updated all gradients to the new amber/orange accent color */
+  .gradient-text {
+    @apply bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent;
+  }
+  .btn-primary {
+    @apply bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-lg
+      hover:from-amber-600 hover:to-orange-700 transition-all transform hover:scale-105 duration-300 shadow-lg hover:shadow-amber-500/20;
+  }
+  .btn-secondary {
+    @apply bg-zinc-800 text-white px-6 py-3 rounded-lg border border-zinc-700
+      hover:bg-zinc-700 transition-all transform hover:scale-105 duration-300;
+  }
+  .card-hover {
+    @apply transition-shadow duration-300;
+  }
+  .card-hover:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  }
+  
+  .glass-strong {
+    @apply bg-zinc-800 border border-zinc-700 rounded-xl shadow-xl;
+  }
+  
+  .glass-light {
+    @apply bg-zinc-800/30 border border-zinc-700/50 rounded-lg shadow-sm;
+  }
+  
+  /* Gradient backgrounds */
+  .gradient-bg-primary {
+    @apply bg-gradient-to-r from-amber-500 to-orange-500;
+  }
+  
+  .gradient-bg-accent {
+    @apply bg-gradient-to-r from-orange-500 to-amber-500;
+  }
+  
+  /* Text gradients */
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent;
+  }
+  
+  /* Border gradients */
+  .border-gradient-primary {
+    @apply border border-transparent bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-border;
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:scale-105 hover:-translate-y-1;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20;
+  }
+  
+  /* Animation utilities */
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .animate-float-fast {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  /* 4. Updated custom scrollbar to match new accent color */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(245, 158, 11, 0.5) transparent; /* Amber color */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(245, 158, 11, 0.5); /* Amber color */
+    border-radius: 3px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(245, 158, 11, 0.7); /* Lighter amber */
+  }
+}
+
+/* Background Elements - restored and updated colors */
+.gradient-mesh, .gradient-mesh-1, .gradient-mesh-2, .noise-overlay {
+  display: block;
+}
+
+.gradient-mesh-1 {
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.2) 0%, transparent 70%); /* Orange */
+  top: -200px;
+  left: -200px;
+}
+
+.gradient-mesh-2 {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%); /* Amber */
+  top: 50%;
+  right: -300px;
+}
+
+.grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.3;
+}
+
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+/* Keyframes (no changes needed here) */
+@keyframes float {
+  0%,100% { transform: translateY(0) }
+  50% { transform: translateY(-20px) }
+}
+
+@keyframes pulse {
+  0%,100% { opacity: 1 }
+  50% { opacity: 0.5 }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Focus styles updated for new theme */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-zinc-900;
+}
