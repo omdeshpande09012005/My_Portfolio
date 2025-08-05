@@ -6,8 +6,7 @@ A dynamic and fully responsive personal portfolio website built with React, Vite
 
 ---
 
-![Portfolio Screenshot]([https://placehold.co/1200x600/18181b/f59e0b?text=Your+Portfolio+Screenshot+Here](https://github.com/omdeshpande09012005/My_Portfolio/issues/1#issue-3293456251))
-*(Suggestion: Replace the placeholder above with a high-quality screenshot or GIF of your live website!)*
+![Portfolio Screenshot](https://github.com/user-attachments/assets/fda9b55a-9a76-42cd-8de9-989998efafa2)
 
 ## ✨ Key Features
 
@@ -69,21 +68,7 @@ Make sure you have Node.js and npm installed on your machine.
     npm run dev
     ```
     The application will be available at `http://localhost:5173` (or the next available port).
-
-## 📂 Project Structure
-
-The project is organized with a clean and scalable component-based structure:
-
-
-/src
-├── /assets         # Static assets like images, logos, and resume PDF
-├── /components     # Reusable React components (Navbar, Hero, Skills, etc.)
-├── /config         # Configuration files (e.g., personalInfo.js)
-├── App.jsx         # Main application component
-├── index.css       # Global styles and Tailwind CSS configuration
-└── main.jsx        # Main entry point of the React application
-
-
+    
 ## 🙏 Acknowledgements
 
 -   Design inspiration from various modern developer portfolios.
@@ -92,4 +77,4 @@ The project is organized with a clean and scalable component-based structure:
 
 ---
 
-Connect with me on [**LinkedIn**](https://www.linkedin.com/in/your-linkedin-profile/) or view the [**live portfolio**](https://my-portfolio-omdeshpande09012005s-projects.vercel.app/).
+Connect with me on [**LinkedIn**](https://www.linkedin.com/in/om-deshpande-5b5733281/) or view the [**live portfolio**](https://my-portfolio-omdeshpande09012005s-projects.vercel.app/).
