@@ -6,7 +6,7 @@ A dynamic and fully responsive personal portfolio website built with React, Vite
 
 ---
 
-![Portfolio Screenshot](https://placehold.co/1200x600/18181b/f59e0b?text=Your+Portfolio+Screenshot+Here)
+![Portfolio Screenshot]([https://placehold.co/1200x600/18181b/f59e0b?text=Your+Portfolio+Screenshot+Here](https://github.com/omdeshpande09012005/My_Portfolio/issues/1#issue-3293456251))
 *(Suggestion: Replace the placeholder above with a high-quality screenshot or GIF of your live website!)*
 
 ## ✨ Key Features
