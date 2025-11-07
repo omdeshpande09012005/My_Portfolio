@@ -1,0 +1,206 @@
+---
+title: "GameAI-Pathfinder: Comparing A* vs Q-Learning for Game Pathfinding"
+slug: gameai-pathfinder-astar-vs-qlearning
+date: 2025-11-06
+tags:
+  - C++
+  - Reinforcement Learning
+  - Research
+  - Algorithms
+excerpt: "A comprehensive comparison of A* and Tabular Q-Learning for 2D grid-based pathfinding. Includes experimental results, statistical analysis, and practical insights."
+coverImage: "/images/blog/gameai-cover.jpg"
+author: "Om Deshpande"
+readingTime: 14
+---
+
+## Introduction
+
+For my research project at MIT-WPU, I built **GameAI-Pathfinder**—a comprehensive comparative study of two fundamental pathfinding approaches used in game AI and robotics: **A\*** (heuristic-based planning) and **Tabular Q-Learning** (learning-based navigation).
+
+This post summarizes the research, implementation, and findings.
+
+## Background: Why Compare These Algorithms?
+
+In game development and robotics, pathfinding is critical. You have two main approaches:
+
+1. **A\* Search**: Deterministic, guaranteed optimal paths, but requires complete map knowledge
+2. **Q-Learning**: Learns optimal policies through exploration, adapts to dynamic environments
+
+The question: How do they compare empirically?
+
+## Research Methodology
+
+### Experimental Setup
+
+I ran 5000 episodes on various grid sizes (10x10, 20x20, 50x50) with:
+- Random start and goal positions
+- Static obstacles
+- Both algorithms operating under identical conditions
+
+### Implementation Details
+
+**A\* in C++:**
+```cpp
+class AStar {
+  std::vector<Node*> openSet;
+  std::unordered_set<Node*> closedSet;
+  
+  std::vector<Node*> findPath(Node* start, Node* goal) {
+    while (!openSet.empty()) {
+      Node* current = getLowestF();
+      if (current == goal) return reconstructPath();
+      // Expand neighbors with heuristic
+    }
+  }
+};
+```
+
+**Q-Learning in C++:**
+```cpp
+class QLearning {
+  std::unordered_map<State, std::vector<double>> qTable;
+  const double alpha = 0.1;      // Learning rate
+  const double gamma = 0.99;     // Discount factor
+  const double epsilon = 0.2;    // Exploration rate
+  
+  void updateQValue(State s, int a, double r, State s_) {
+    double maxQ = getMaxQ(s_);
+    qTable[s][a] += alpha * (r + gamma * maxQ - qTable[s][a]);
+  }
+};
+```
+
+## Key Results
+
+### Performance Metrics
+
+| Metric | A* | Q-Learning | Observation |
+|--------|-----|-----------|------------|
+| **Success Rate** | 100% | 100% | Both converge fully |
+| **Avg Path Length** | Optimal | +5-10% | Q-Learning slightly suboptimal |
+| **Computation Time** | 2-5ms | 15-50ms | A* significantly faster |
+| **Memory Usage** | ~2MB | ~5MB | Q-Learning stores Q-table |
+
+### Statistical Analysis
+
+- **Paired T-Test**: p-value = 0.1732 (not significant)
+- **Cohen's d**: 1.20 (large practical difference)
+- **Conclusion**: No statistically significant difference, but Q-Learning shows practical disadvantages
+
+## Insights
+
+### When to Use A\*
+
+✅ **Use A\* for:**
+- Static maps with complete information
+- Optimal paths required
+- Real-time performance critical
+- Limited computational resources
+
+### When to Use Q-Learning
+
+✅ **Use Q-Learning for:**
+- Dynamic, partially known environments
+- Adaptive behavior required
+- Long-term adaptation
+- Multiple objectives
+
+## Implementation Challenges
+
+1. **State Space Explosion**: Q-Learning struggles with large grids
+2. **Hyperparameter Tuning**: Required careful calibration (α, γ, ε)
+3. **Convergence Speed**: Needed 5000+ episodes for convergence
+4. **Memory Management**: Q-table grows exponentially
+
+## Solutions Implemented
+
+```cpp
+// Discretized state representation
+struct State {
+  int gridX, gridY;
+  bool operator==(const State& other) const {
+    return gridX == other.gridX && gridY == other.gridY;
+  }
+};
+
+// Experience replay buffer
+class ExperienceBuffer {
+  std::deque<Experience> buffer;
+  
+  void add(Experience e) {
+    if (buffer.size() > MAX_SIZE) buffer.pop_front();
+    buffer.push_back(e);
+  }
+  
+  std::vector<Experience> sample(int batchSize) {
+    // Random sampling for training
+  }
+};
+```
+
+## Visualization
+
+The experiments generated several visualizations:
+
+- **Success Rate Plot**: Q-Learning convergence over episodes
+- **Path Length Distribution**: Histogram comparison
+- **Computation Time vs Grid Size**: Scaling analysis
+- **Heatmaps**: State visitation frequencies
+
+## Code Structure
+
+```
+GameAI-Pathfinder/
+├── src/
+│   ├── astar.cpp          # A* implementation
+│   ├── qlearning.cpp      # Q-Learning implementation
+│   ├── grid.cpp           # Grid representation
+│   └── utils.cpp          # Utilities
+├── experiments/
+│   ├── run_grid.ps1       # PowerShell automation
+│   ├── analyze.py         # Statistical analysis
+│   └── make_latex_table.py # Paper generation
+├── paper/
+│   └── paper_draft_final.tex
+└── CMakeLists.txt
+```
+
+## Building and Running
+
+```bash
+# Build
+mkdir build && cd build
+cmake .. -G "MinGW Makefiles"
+cmake --build . --config Release
+
+# Run experiments
+cd ..
+.\experiments\run_grid.ps1
+
+# Analyze
+python experiments/analyze.py
+```
+
+## Key Takeaways
+
+1. **A\* dominates for known, static environments**
+2. **Q-Learning is more adaptable but requires more training**
+3. **Hybrid approaches could combine strengths of both**
+4. **Real-world scenarios often benefit from A\* + fallback learning**
+
+## Future Work
+
+- Implement Deep Q-Networks (DQN) for larger state spaces
+- Test on more complex, dynamic environments
+- Explore Actor-Critic methods
+- Compare with other algorithms (Dijkstra, Theta\*)
+
+## Conclusion
+
+This research demonstrates that while A\* remains superior for static pathfinding, Q-Learning's adaptability makes it valuable in dynamic scenarios. The choice depends on your specific use case and environment constraints.
+
+Check out the full code on [GitHub](https://github.com/omdeshpande09012005/GameAI-Pathfinder)!
+
+---
+
+**What's your favorite pathfinding algorithm? Share your thoughts in the comments!**

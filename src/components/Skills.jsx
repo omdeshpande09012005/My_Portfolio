@@ -2,81 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
 import { CheckCircle } from 'lucide-react';
-
-// --- All your logos are now being imported ---
-import cppLogo from '../assets/logos/c++-logo.png';
-import javascriptLogo from '../assets/logos/javascript-logo.png';
-import phpLogo from '../assets/logos/php-logo.png';
-import cLogo from '../assets/logos/c-logo.png';
-import reactLogo from '../assets/logos/react.js-logo.png';
-import nodeLogo from '../assets/logos/node.js-logo.png';
-import tailwindLogo from '../assets/logos/tailwindcss-logo.png';
-import htmlLogo from '../assets/logos/html5-logo.png';
-import cssLogo from '../assets/logos/css3-logo.png';
-import mysqlLogo from '../assets/logos/mysql-logo.png';
-import postgresqlLogo from '../assets/logos/postgresql-logo.png';
-import awsLogo from '../assets/logos/aws-logo.png';
-import azureLogo from '../assets/logos/azure-logo.png';
-import googleCloudLogo from '../assets/logos/googlecloud-logo.png';
-import gitLogo from '../assets/logos/git-logo.png';
-import githubLogo from '../assets/logos/github-logo.png';
-import vscodeLogo from '../assets/logos/vscode-logo.png';
-import cursoraiLogo from '../assets/logos/cursorai-logo.png';
-// --- FIX: The import for the python logo is now active ---
-import pythonLogo from '../assets/logos/python-logo.png';
-
-
-const skillsData = [
-  {
-    category: "Programming Languages",
-    skills: [
-      { name: 'C++', proficiency: 'Advanced', iconText: 'C++', logo: cppLogo },
-      // --- FIX: The pythonLogo is now assigned ---
-      { name: 'Python', proficiency: 'Proficient', iconText: 'PY', logo: pythonLogo },
-      { name: 'JavaScript', proficiency: 'Proficient', iconText: 'JS', logo: javascriptLogo },
-      { name: 'PHP', proficiency: 'Intermediate', iconText: 'PHP', logo: phpLogo },
-      { name: 'C', proficiency: 'Intermediate', iconText: 'C', logo: cLogo },
-    ]
-  },
-  {
-    category: "Frameworks & Libraries",
-    skills: [
-      { name: 'React.js', proficiency: 'Proficient', iconText: 'R', logo: reactLogo },
-      { name: 'Node.js', proficiency: 'Intermediate', iconText: 'N', logo: nodeLogo },
-      { name: 'TailwindCSS', proficiency: 'Advanced', iconText: 'T', logo: tailwindLogo },
-      { name: 'HTML5', proficiency: 'Advanced', iconText: 'H5', logo: htmlLogo },
-      { name: 'CSS3', proficiency: 'Advanced', iconText: 'C3', logo: cssLogo },
-    ]
-  },
-  {
-    category: "Databases",
-    skills: [
-      { name: 'MySQL', proficiency: 'Advanced', iconText: 'SQL', logo: mysqlLogo },
-      { name: 'PostgreSQL', proficiency: 'Intermediate', iconText: 'SQL', logo: postgresqlLogo },
-    ]
-  },
-  {
-    category: "Cloud & Tools",
-    skills: [
-      { name: 'AWS', proficiency: 'Intermediate', iconText: 'AWS', logo: awsLogo },
-      { name: 'Azure', proficiency: 'Intermediate', iconText: 'AZ', logo: azureLogo },
-      { name: 'Google Cloud', proficiency: 'Intermediate', iconText: 'GC', logo: googleCloudLogo },
-      { name: 'Git', proficiency: 'Proficient', iconText: 'G', logo: gitLogo },
-      { name: 'GitHub', proficiency: 'Proficient', iconText: 'GH', logo: githubLogo },
-      { name: 'VS Code', proficiency: 'Advanced', iconText: 'VS', logo: vscodeLogo },
-      { name: 'CursorAI', proficiency: 'Advanced', iconText: 'AI', logo: cursoraiLogo },
-    ]
-  }
-];
-
-const softSkills = [
-  'Problem Solving',
-  'System Optimization',
-  'Technical Communication',
-  'Team Collaboration',
-  'Adaptability',
-  'Attention to Detail',
-];
+import { technicalSkillsData, softSkillsData } from '../data/skills';
 
 const Skills = () => {
   return (
@@ -96,7 +22,7 @@ const Skills = () => {
           <div className="lg:col-span-2">
             <AnimatedSection animation="fadeInLeft">
               <div className="space-y-10">
-                {skillsData.map((category, catIndex) => (
+                {technicalSkillsData.map((category, catIndex) => (
                   <div key={catIndex}>
                     <h3 className="text-2xl font-display font-semibold text-white mb-6">{category.category}</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
@@ -125,7 +51,7 @@ const Skills = () => {
                   Professional Skills
                 </h3>
                 <div className="space-y-4">
-                  {softSkills.map((skill, index) => (
+                  {softSkillsData.map((skill, index) => (
                     <motion.div
                       key={skill}
                       className="flex items-center gap-4"

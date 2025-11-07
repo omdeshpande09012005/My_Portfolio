@@ -28,7 +28,7 @@ const Footer = () => {
     }
   ];
 
-  const footerDescription = "Proactive Computer Science student with hands-on experience in full-stack web development and cloud security.";
+  const footerDescription = "I design and ship reliable systems. From Next.js products (TextShare) to C++ game AI (GameAI-Pathfinder), I care about engineering clarity, performance, and developer ergonomics.";
 
   return (
     // --- FIX: Changed id to "footer" to avoid conflicts ---
@@ -65,7 +65,7 @@ const Footer = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="block text-zinc-400 hover:text-amber-400 transition-colors duration-300"
+                  className="block text-zinc-400 hover:text-primary-400 transition-colors duration-300"
                   onClick={(e) => {
                     e.preventDefault();
                     document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
@@ -86,11 +86,11 @@ const Footer = () => {
           >
             <h4 className="text-lg font-semibold text-white mb-6">Let's Connect</h4>
             <div className="space-y-4 mb-6">
-              <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${personalInfo.email}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start gap-3 text-zinc-400 hover:text-amber-400 transition-colors">
+              <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${personalInfo.email}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start gap-3 text-zinc-400 hover:text-primary-400 transition-colors">
                 <Mail size={18} />
                 <span>{personalInfo.email}</span>
               </a>
-              <a href={`tel:${personalInfo.phone.replace(/\s/g, '')}`} className="flex items-center justify-center md:justify-start gap-3 text-zinc-400 hover:text-amber-400 transition-colors">
+              <a href={`tel:${personalInfo.phone.replace(/\s/g, '')}`} className="flex items-center justify-center md:justify-start gap-3 text-zinc-400 hover:text-primary-400 transition-colors">
                 <Phone size={18} />
                 <span>{personalInfo.phone}</span>
               </a>
@@ -102,7 +102,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 glass rounded-full text-zinc-300 hover:text-amber-400 hover:bg-zinc-700/50 transition-all duration-300"
+                  className="p-3 glass rounded-full text-zinc-300 hover:text-primary-400 hover:bg-zinc-700/50 transition-all duration-300"
                   whileHover={{ scale: 1.1, y: -2 }}
                 >
                   <social.icon size={20} />

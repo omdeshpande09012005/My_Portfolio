@@ -1,0 +1,48 @@
+---
+title: "GameAI-Pathfinder: A* vs Q-Learning on Grid Maps (C++ + Python)"
+slug: "gameai-pathfinder-study"
+date: 2025-11-07
+coverImage: "/images/case-studies/gameai/cover.png"
+summary: "A reproducible C++ framework comparing heuristic search (A*) vs tabular Q-Learning with statistical evaluation, plots, and reproducible runners."
+tags: ["C++", "Reinforcement Learning", "A*", "Q-Learning", "Python", "Stats"]
+paperUrl: "/assets/GameAI-Pathfinder.pdf"
+repoUrl: "https://github.com/omdeshpande09012005/GameAI-Pathfinder"
+readingTime: 10
+ogImageText: "A* vs Q-Learning — When Does Learning Catch Up?"
+type: "case-study"
+---
+
+## What I Built
+
+A C++17 framework implementing A* and tabular Q-Learning, plus PowerShell runners and Python analysis that generate CSVs, plots, and LaTeX tables. The goal: quantify when Q-Learning approaches A* in small grid worlds.
+
+## Experimental Setup
+
+- **Maps:** 10×10–20×20 grids, 15–25% obstacles
+- **Rewards:** step −1, collision −50, goal +100
+- **Q-Learning:** ε-decay, α∈{0.05, 0.1}, γ∈{0.9, 0.99}, episodes∈{500..5000}
+- **N=20 eval runs/config** Shapiro–Wilk + paired t-test; Cohen's d
+
+## Results (Short)
+
+- With 5k episodes, Q-Learning reaches ~100% success but median paths are still ~5–10% longer than A*.
+- Large effect size (d≈1.20) on path optimality: A* remains practically superior on static known maps.
+- Q-Learning shines in adaptability (stochastic/partial info).
+
+## Reproducibility
+
+- Deterministic seeds
+- CSV logs + plotting scripts
+- LaTeX table auto-generated
+- Paper PDF linked above
+
+## Future Work
+
+- DQN for larger maps
+- Procedural map generalization
+- Hybrid global (A*) + local (RL) planners
+
+## Links
+
+- **Paper (PDF):** /assets/GameAI-Pathfinder.pdf
+- **Repo:** https://github.com/omdeshpande09012005/GameAI-Pathfinder

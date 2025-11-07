@@ -2,7 +2,7 @@ export const personalInfo = {
   // Basic Information
   name: "Om Deshpande",
   shortName: "OmDeshpande", // For branding (e.g., "Om.dev")
-  title: "Software Engineer",
+  title: "CS Student | AI/ML Researcher | Game Developer",
   email: "omdeshpande123456789@gmail.com",
   phone: "+91 9503248173",
   location: {
@@ -23,7 +23,7 @@ export const personalInfo = {
     degree: "B. Tech in Computer Science and Engineering",
     institution: "MIT World Peace University, Pune",
     year: "2023-2027",
-    gpa: "8.68/10.0",
+    gpa: "8.75/10.0 (3.5/4.0)",
     location: "Pune, India"
   },
 
@@ -113,24 +113,24 @@ export const personalInfo = {
 
   // About Me
   about: {
-    description: "Proactive Computer Science student with practical experience in software development, AI, and hardware optimization. Proven technical expertise through building and configuring over 20 custom PCs, leading to a 15% average performance increase, and managing technical logistics for 50+ participants.",
+    description: "I design and ship reliable systems. From Next.js products (TextShare) to C++ game AI (GameAI-Pathfinder), I care about engineering clarity, performance, and developer ergonomics. Currently polishing my research and infrastructure chops.",
     interests: [
-      'Software Development',
-      'AI',
-      'Hardware Optimization',
-      'PC Building',
-      'Cloud Computing',
-      'Web & Database'
+      'AI & Reinforcement Learning',
+      'Game Development & Physics Engines',
+      'Scalable Backend Systems & DevOps',
+      'AI/ML Research & Pathfinding',
+      'Cloud-Native Platforms',
+      'Full-Stack Development'
     ],
     values: [
-      'Innovation',
-      'Quality Code',
-      'Continuous Learning',
-      'Team Collaboration',
-      'User Experience',
-      'Problem Solving',
-      'Attention to Detail',
-      'Adaptability'
+      'Engineering Clarity',
+      'Performance',
+      'Developer Ergonomics',
+      'System Optimization',
+      'Research-Driven Development',
+      'Scalable Design',
+      'Creative Problem Solving',
+      'Reproducible Results'
     ]
   },
 

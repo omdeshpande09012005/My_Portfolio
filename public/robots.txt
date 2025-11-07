@@ -1,0 +1,29 @@
+# Robots.txt for omdeshpande.dev
+# Allows all bots to crawl the site
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /.next/
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /*.json$
+
+# Specific crawl delays
+Crawl-delay: 0
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://omdeshpande.dev/sitemap.xml

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
-import { GraduationCap, Calendar, MapPin, Award, BookOpen, ChevronDown } from 'lucide-react';
+import { GraduationCap, Calendar, MapPin, Award } from 'lucide-react';
 import { personalInfo } from '../config/personalInfo';
 
 // --- IMPORT YOUR COLLEGE LOGO HERE ---
 import mitwpuLogo from '../assets/logos/mitwpu-logo.png';
 
 const Education = () => {
-  // --- Updated data structure to include course descriptions ---
+  // --- Updated data structure for education ---
   const educationData = [
     {
       degree: personalInfo.education.degree,
@@ -17,33 +17,9 @@ const Education = () => {
       gpa: personalInfo.education.gpa,
       location: personalInfo.education.location,
       description: "Pursuing a comprehensive Computer Science curriculum covering programming fundamentals, data structures, algorithms, and modern software development practices.",
-      logo: mitwpuLogo,
-      courses: [
-        { 
-          name: "Data Structures & Algorithms", 
-          description: "Mastered fundamental data structures and analyzed algorithm complexity (Big O) to write efficient, scalable code for complex problem-solving." 
-        },
-        { 
-          name: "Object-Oriented Programming", 
-          description: "Learned to design modular and reusable software using core OOP principles like encapsulation, inheritance, and polymorphism, primarily through C++." 
-        },
-        { 
-          name: "Database Management Systems", 
-          description: "Gained expertise in relational database design, data modeling, and writing complex SQL queries to ensure data integrity and efficient retrieval." 
-        },
-        { 
-          name: "Software Engineering", 
-          description: "Studied the software development lifecycle, including requirements gathering, design patterns, testing, and agile methodologies for team-based projects." 
-        },
-        { 
-          name: "Computer Networks", 
-          description: "Explored the underlying principles of the internet, focusing on network protocols like TCP/IP, routing, and ensuring reliable data transmission." 
-        },
-      ]
+      logo: mitwpuLogo
     }
   ];
-
-  const [expandedCourse, setExpandedCourse] = useState(null);
 
   return (
     <section id="education" className="py-20 relative">
@@ -78,7 +54,7 @@ const Education = () => {
                     {edu.logo ? (
                       <img src={edu.logo} alt={`${edu.institution} Logo`} className="object-contain h-full w-full" />
                     ) : (
-                      <GraduationCap size={64} className="text-amber-400" />
+                      <GraduationCap size={64} className="text-primary-400" />
                     )}
                   </div>
                 </motion.div>
@@ -92,52 +68,12 @@ const Education = () => {
                   <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-4 text-zinc-400">
                     <div className="flex items-center gap-2"><Calendar size={16} /><span>{edu.year}</span></div>
                     <div className="flex items-center gap-2"><MapPin size={16} /><span>{edu.location}</span></div>
-                    {edu.gpa && <div className="flex items-center gap-2"><Award size={16} /><span className="text-orange-400 font-medium">GPA: {edu.gpa}</span></div>}
+                    {edu.gpa && <div className="flex items-center gap-2"><Award size={16} /><span className="text-secondary-400 font-medium">GPA: {edu.gpa}</span></div>}
                   </div>
                   <p className="text-zinc-300 leading-relaxed">{edu.description}</p>
                 </div>
               </div>
 
-              {/* --- NEW: Interactive Coursework Accordion --- */}
-              <div className="border-t border-zinc-700 pt-8">
-                <h3 className="text-2xl font-display font-semibold text-white mb-6 flex items-center gap-3">
-                  <BookOpen className="text-amber-400" />
-                  Key Coursework Insights
-                </h3>
-                <div className="space-y-3">
-                  {edu.courses.map((course, index) => (
-                    <div key={index} className="glass rounded-lg overflow-hidden">
-                      <motion.button
-                        onClick={() => setExpandedCourse(expandedCourse === index ? null : index)}
-                        className="w-full flex justify-between items-center p-4 text-left"
-                      >
-                        <span className="font-semibold text-white">{course.name}</span>
-                        <motion.div
-                          animate={{ rotate: expandedCourse === index ? 180 : 0 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <ChevronDown className="text-amber-400" />
-                        </motion.div>
-                      </motion.button>
-                      <AnimatePresence>
-                        {expandedCourse === index && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3, ease: "easeInOut" }}
-                            className="px-4"
-                          >
-                            <p className="text-zinc-300 pb-4 border-t border-zinc-700 pt-3 text-sm">
-                              {course.description}
-                            </p>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
           </AnimatedSection>
         ))}

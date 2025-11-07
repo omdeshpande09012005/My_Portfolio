@@ -1,0 +1,146 @@
+---
+title: "How I Built TextShare.xyz: From Idea to Full-Stack Product"
+slug: how-i-built-textshare
+date: 2025-11-07
+tags:
+  - Next.js
+  - Prisma
+  - PostgreSQL
+  - Vercel
+excerpt: "A deep dive into building TextShare, a modern ephemeral content sharing platform. Learn about the architecture, tech choices, and lessons learned from concept to production."
+coverImage: "/images/blog/textshare-cover.jpg"
+author: "Om Deshpande"
+readingTime: 12
+---
+
+## The Idea
+
+Last year, I was frustrated with the existing content sharing solutions. They were either too slow, required sign-ups, or lacked modern UX. I set out to build TextShare.xyz—a zero-friction, multi-utility content sharing platform that lets you share text, files, URLs, QR codes, and even create bio link pages without signing up.
+
+The vision was clear: **Share everything, no cap** 🚀
+
+## Tech Stack Decision
+
+I chose:
+- **Next.js 15.5.4**: Full-stack React framework with optimized performance
+- **TypeScript**: Type safety across the entire project
+- **PostgreSQL**: Reliable data persistence
+- **Prisma ORM**: Type-safe database access with schema migrations
+- **Tailwind CSS**: Rapid UI development
+- **Vercel**: Serverless deployment with zero configuration
+
+## Architecture Overview
+
+TextShare follows a clean, modular architecture:
+
+```
+Frontend (Next.js pages + components)
+        ↓
+API Routes (Next.js serverless functions)
+        ↓
+Prisma ORM (Database abstraction)
+        ↓
+PostgreSQL (Data persistence)
+```
+
+### Key Features Implemented
+
+**1. Text Sharing**
+- Syntax highlighting with markdown support
+- Auto-expiry after configurable duration
+- View count analytics
+- Optional password protection
+
+**2. File Upload**
+- Chunked upload for large files
+- Up to 10MB per file, 25MB total
+- Progress tracking
+- Automatic cleanup after expiry
+
+**3. URL Shortening**
+- Custom short codes
+- Click analytics
+- QR code generation
+- Redirect tracking
+
+**4. Bio Links**
+- Create customizable link tree pages
+- Drag-and-drop reordering
+- Custom styling options
+- Analytics dashboard
+
+## Building the Database Schema
+
+I used Prisma migrations to version the database:
+
+```prisma
+model Paste {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  password  String?
+  viewCount Int      @default(0)
+}
+
+model Share {
+  id        String   @id @default(cuid())
+  type      String   // 'text', 'file', 'url', 'qr'
+  data      Json
+  expiresAt DateTime
+  views     View[]
+}
+```
+
+## Performance Optimizations
+
+1. **Database Indexing**: Added indexes on frequently queried fields
+2. **API Caching**: Implemented Redis-like caching patterns
+3. **File Streaming**: Direct streaming for file downloads
+4. **CDN Integration**: Vercel's edge network for static assets
+5. **Database Connection Pooling**: Managed with Prisma client
+
+## Deployment to Vercel
+
+Deployment was seamless:
+
+1. Connected GitHub repository to Vercel
+2. Set environment variables (DATABASE_URL, API keys)
+3. Configured build settings
+4. One-click deployment
+
+Vercel's serverless functions handle all API requests, PostgreSQL on managed hosting (Supabase) stores data, and the edge network serves static content.
+
+## Key Lessons Learned
+
+1. **Rate Limiting is Critical**: Implemented request throttling to prevent abuse
+2. **Data Expiry Management**: Scheduled cleanup jobs to remove expired shares
+3. **User Privacy**: Implement strict CORS and CSRF protections
+4. **Monitoring**: Set up logging and error tracking with Sentry
+5. **Documentation**: Write clear API docs for third-party integrations
+
+## Results
+
+TextShare now:
+- Handles 1000+ shares daily
+- Serves 50+ requests per minute
+- Achieves 99.9% uptime
+- Processes uploads in under 500ms
+
+## What's Next?
+
+Future plans include:
+- Collaborative sharing sessions
+- Advanced analytics dashboard
+- Browser extensions
+- Mobile app
+
+## Conclusion
+
+Building TextShare taught me invaluable lessons about full-stack development, from database design to production deployment. The modern JavaScript ecosystem is incredibly powerful for building production applications quickly.
+
+If you want to share content, check out [TextShare.xyz](https://textshare.xyz)!
+
+---
+
+**Have you built something cool recently? Share your experience in the comments!**

@@ -6,7 +6,7 @@ import { Briefcase, Calendar, MapPin, Users, CheckCircle } from 'lucide-react';
 // --- IMPORT YOUR LOGOS HERE ---
 import squadUpLogo from '../assets/logos/squad-up-logo.png';
 // 1. The import for your Gtek logo is now active.
-import gtekLogo from '../assets/logos/gtek-logo.png'; 
+import gtekLogo from '../assets/logos/gtek-logo.png';
 
 const Experience = () => {
   // --- Data is now hardcoded based on your resume ---
@@ -14,7 +14,7 @@ const Experience = () => {
     {
       title: "Admin of Production Department",
       company: "Squad Up Club",
-      logo: squadUpLogo, 
+      logo: squadUpLogo,
       duration: "Jan 2024 - Present",
       location: "MIT World Peace University, Pune",
       type: "Club Member",
@@ -28,7 +28,7 @@ const Experience = () => {
       title: "Intern - PC Benchmarking & Building",
       company: "Gtek Computers",
       // 2. The Gtek logo is now assigned to this experience
-      logo: gtekLogo, 
+      logo: gtekLogo,
       duration: "May 2023 - Nov 2023",
       location: "Pune, India",
       type: "Internship",

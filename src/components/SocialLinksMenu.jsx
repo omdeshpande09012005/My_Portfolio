@@ -70,31 +70,31 @@ const Contact = () => {
 
         <AnimatedSection animation="fadeInUp">
           <div className="glass rounded-2xl p-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-amber-500/10 to-orange-500/10 rounded-full blur-3xl" />
+            <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-primary-500/10 to-secondary-500/10 rounded-full blur-3xl" />
             <div className="relative z-10">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <input
                     type="text" name="name" value={formData.name} onChange={handleInputChange} required
                     placeholder="Full Name *"
-                    className="w-full px-4 py-3 bg-zinc-800/50 border-2 border-zinc-700 focus:border-amber-500 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-0 transition-colors duration-300"
+                    className="w-full px-4 py-3 bg-zinc-800/50 border-2 border-zinc-700 focus:border-primary-500 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-0 transition-colors duration-300"
                   />
                   <input
                     type="email" name="email" value={formData.email} onChange={handleInputChange} required
                     placeholder="Email Address *"
-                    className="w-full px-4 py-3 bg-zinc-800/50 border-2 border-zinc-700 focus:border-amber-500 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-0 transition-colors duration-300"
+                    className="w-full px-4 py-3 bg-zinc-800/50 border-2 border-zinc-700 focus:border-primary-500 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-0 transition-colors duration-300"
                   />
                 </div>
                 <input
                   type="text" name="subject" value={formData.subject} onChange={handleInputChange}
                   placeholder="Subject"
-                  className="w-full px-4 py-3 bg-zinc-800/50 border-2 border-zinc-700 focus:border-amber-500 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-0 transition-colors duration-300"
+                  className="w-full px-4 py-3 bg-zinc-800/50 border-2 border-zinc-700 focus:border-primary-500 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-0 transition-colors duration-300"
                 />
                 <textarea
                   name="message" value={formData.message} onChange={handleInputChange} required
                   rows={5}
                   placeholder="Your Message *"
-                  className="w-full px-4 py-3 bg-zinc-800/50 border-2 border-zinc-700 focus:border-amber-500 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-0 transition-colors duration-300 resize-none"
+                  className="w-full px-4 py-3 bg-zinc-800/50 border-2 border-zinc-700 focus:border-primary-500 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-0 transition-colors duration-300 resize-none"
                 />
 
                 <motion.button
@@ -109,7 +109,7 @@ const Contact = () => {
                   whileHover="hover"
                 >
                   <motion.span
-                    className="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600"
+                    className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-600"
                     variants={{
                       valid: { width: "100%" },
                       invalid: { width: "0%" }
@@ -164,7 +164,7 @@ const Contact = () => {
                       className="p-4 glass rounded-full group hover-glow"
                       whileHover={{ scale: 1.1, y: -5 }}
                     >
-                      <method.icon className="text-zinc-300 group-hover:text-amber-400 transition-colors duration-300" size={24} />
+                      <method.icon className="text-zinc-300 group-hover:text-primary-400 transition-colors duration-300" size={24} />
                     </motion.a>
                   ))}
                 </div>

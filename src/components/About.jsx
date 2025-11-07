@@ -3,29 +3,25 @@ import { motion } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
 import { Code, Layers, Cloud, Cpu, GraduationCap, MapPin } from 'lucide-react';
 import { personalInfo } from '../config/personalInfo';
+import { aboutStats } from '../data/stats';
 
 const About = () => {
-  const stats = [
-    { number: '2+', label: 'Full-Stack Projects', icon: Layers },
-    { number: '5+', label: 'Core Languages', icon: Code },
-    { number: '3', label: 'Cloud Platforms', icon: Cloud },
-    { number: '10+', label: 'High-Perf. Systems', icon: Cpu }
-  ];
-
   const interests = [
-    'Full-Stack Development',
-    'Cloud Security',
-    'Object-Oriented Programming',
-    'AI/ML',
+    'AI & Reinforcement Learning',
+    'Game Development & Physics',
+    'Scalable Backend Systems',
+    'Cloud-Native Platforms',
     'System Optimization',
-    'PC Building'
+    'DevOps & Infrastructure'
   ];
 
   const values = [
-    'Clean & Efficient Code',
-    'Problem Solving',
-    'Continuous Learning',
-    'User-Centric Design'
+    'Engineering Clarity',
+    'Performance',
+    'Developer Ergonomics',
+    'System Optimization',
+    'Research-Driven Dev',
+    'Scalable Design'
   ];
 
   const education = [
@@ -53,7 +49,7 @@ const About = () => {
             About <span className="gradient-text">Me</span>
           </h2>
           <p className="text-xl text-zinc-400 max-w-3xl mx-auto">
-            A developer driven by a passion for building robust software and understanding technology from the inside out.
+            I design and ship reliable systems — from AI research and game development to scalable cloud platforms. Engineering clarity, performance, and developer ergonomics drive everything I build.
           </p>
         </AnimatedSection>
 
@@ -65,16 +61,22 @@ const About = () => {
                 My Journey in Tech
               </h3>
               <p className="text-zinc-300 text-lg leading-relaxed mb-6">
-                As a Computer Science student, my focus is on building practical, high-quality software. I've engineered a full-stack e-commerce application from the ground up using PHP and MySQL, and explored core software design by developing a multi-game platform in C++, focusing on OOP principles.
+                I'm a Computer Science student who enjoys building systems that are not only <span className="text-primary-400 font-semibold">functional — but intelligent, efficient, and scalable</span>. I started by creating real-world applications: a full-stack Online Bookstore in PHP and MySQL, and later deepened my understanding of core software design by building a modular multi-game platform in C++.
+              </p>
+              <p className="text-zinc-300 text-lg leading-relaxed mb-6">
+                Over time, my curiosity shifted from <span className="italic">"how to build software"</span> to <span className="italic">"how to make it smarter, faster, and meaningful enough to solve real problems."</span> This pushed me into AI, reinforcement learning, and system-level development.
+              </p>
+              <p className="text-zinc-300 text-lg leading-relaxed mb-6">
+                I built <span className="text-secondary-400 font-semibold">GameAI-Pathfinder</span>, a research project comparing heuristic-based A* pathfinding with reinforcement learning agents — my first deep step into AI experimentation, reproducible results, statistical evaluation, and research writing. Alongside AI, I developed <span className="text-secondary-400 font-semibold">TextShare.xyz</span>, a production-ready Next.js platform for secure content sharing, and <span className="text-secondary-400 font-semibold">FormBridge Cloud</span>, a serverless AWS-based automation platform with email handling and AI analytics.
               </p>
               <p className="text-zinc-300 text-lg leading-relaxed mb-8">
-                My curiosity extends to the infrastructure that powers modern applications, leading me to research and write about security challenges in multi-tenant cloud environments. While I have a strong interest in hardware and system optimization—honed by building and benchmarking high-performance PCs—I apply this foundational knowledge to write more efficient and resilient code. This gives me a unique, full-spectrum perspective on technology, from bare metal to the browser.
+                I also have a background in hardware and performance engineering — building, testing, and benchmarking high-performance PCs — which helps me understand computing from the metal to the machine learning model. Today, I'm actively exploring the intersection of <span className="text-primary-400 font-semibold">AI, game development, and scalable engineering systems</span> — building things that combine creativity with research-driven technology.
               </p>
 
               {/* Education */}
               <div className="mb-8">
                 <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <GraduationCap size={20} className="text-amber-400" />
+                  <GraduationCap size={20} className="text-primary-400" />
                   Education
                 </h4>
                 {education.map((edu, index) => (
@@ -82,8 +84,8 @@ const About = () => {
                     <h5 className="text-white font-semibold">{edu.degree}</h5>
                     <p className="text-zinc-400 text-sm">{edu.institution}</p>
                     <div className="flex items-center gap-4 mt-2 text-sm">
-                      <span className="text-amber-400">{edu.year}</span>
-                      {edu.gpa && <span className="text-orange-400">GPA: {edu.gpa}</span>}
+                      <span className="text-primary-400">{edu.year}</span>
+                      {edu.gpa && <span className="text-secondary-400">GPA: {edu.gpa}</span>}
                     </div>
                   </div>
                 ))}
@@ -92,12 +94,12 @@ const About = () => {
               {/* Location */}
               <div>
                 <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <location.icon size={20} className="text-amber-400" />
+                  <location.icon size={20} className="text-primary-400" />
                   Location & Availability
                 </h4>
                 <div className="glass rounded-lg p-4">
                   <p className="text-zinc-200">{location.city}, {location.country}</p>
-                  <p className="text-orange-400 text-sm mt-1">{location.availability}</p>
+                  <p className="text-secondary-400 text-sm mt-1">{location.availability}</p>
                 </div>
               </div>
             </div>
@@ -108,7 +110,7 @@ const About = () => {
             <div className="space-y-8">
               {/* Stats Grid */}
               <div className="grid grid-cols-2 gap-6">
-                {stats.map((stat, index) => (
+                {aboutStats.map((stat, index) => (
                   <motion.div
                     key={stat.label}
                     className="glass rounded-xl p-6 text-center group hover-glow" // --- UPGRADE: Added hover-glow class ---
@@ -117,7 +119,7 @@ const About = () => {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     whileHover={{ scale: 1.05, y: -5 }}
                   >
-                    <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-lg mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-600 rounded-lg mb-4 group-hover:scale-110 transition-transform duration-300">
                       <stat.icon size={24} className="text-white" />
                     </div>
                     <p className="text-3xl font-bold text-white mb-2">
@@ -140,7 +142,7 @@ const About = () => {
                   {interests.map((interest) => (
                     <span
                       key={interest}
-                      className="px-3 py-1 bg-amber-500/10 border border-amber-400/30 rounded-full text-zinc-200 text-sm"
+                      className="px-3 py-1 bg-primary-500/10 border border-primary-400/30 rounded-full text-zinc-200 text-sm"
                     >
                       {interest}
                     </span>
@@ -160,7 +162,7 @@ const About = () => {
                   {values.map((value) => (
                     <span
                       key={value}
-                      className="px-3 py-1 bg-orange-500/10 border border-orange-400/30 rounded-full text-zinc-200 text-sm"
+                      className="px-3 py-1 bg-secondary-500/10 border border-secondary-400/30 rounded-full text-zinc-200 text-sm"
                     >
                       {value}
                     </span>

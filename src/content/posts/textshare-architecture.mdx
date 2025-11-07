@@ -1,0 +1,333 @@
+---
+title: "TextShare: Enterprise-Ready Production Upgrade"
+slug: "textshare-architecture"
+date: 2025-11-07
+updated: 2025-11-07
+coverImage: "/images/case-studies/textshare/cover.png"
+summary: "Scaling TextShare from MVP to production: environment validation, rate limiting, API docs, security, logging, CI/CD, and comprehensive testing."
+tags: ["Next.js", "TypeScript", "Prisma", "Security", "CI/CD", "API Design"]
+repoUrl: "https://github.com/omdeshpande09012005/textshare"
+demoUrl: "https://textshare.xyz"
+readingTime: 12
+ogImageText: "TextShare — Production Upgrade"
+type: "case-study"
+---
+
+## Executive Summary
+
+TextShare is a multi-utility content sharing platform (pastes, files, URLs, QR codes, bio links). I upgraded it from MVP to an enterprise-ready system suitable for thousands of concurrent users by addressing 14 critical domains.
+
+---
+
+## The MVP Foundation
+
+**What We Built:**
+- Next.js 15 with TypeScript (strict mode)
+- Prisma ORM + PostgreSQL
+- Tailwind CSS for styling
+- Basic API routes: `/api/pastes`, `/api/files`, `/api/urls`
+- File limits: 10MB/file, 25MB total
+
+**What Worked:** Zero-signup UX, fast delivery, solid schema design
+
+**What Was Missing:**
+- No environment validation → production crashes
+- No rate limiting → free-tier unsustainable
+- No API documentation → poor adoption
+- No logging → impossible to debug
+- No health checks → can't monitor
+- No security headers → vulnerable to XSS
+- No CI/CD → manual deployments
+- Minimal testing → risky changes
+
+---
+
+## Production Upgrade Path
+
+### 1. Environment Validation with Zod
+
+**Challenge:** Reading `process.env` directly leads to cryptic runtime errors
+
+**Solution:** Type-safe validation at build time
+- All env vars validated with Zod schemas
+- Build fails if `DATABASE_URL` is missing or invalid
+- Centralized configuration for rate limits, file sizes
+- Optional keys like `RESEND_API_KEY` handled gracefully
+
+**Impact:** Caught configuration issues before deployment
+
+---
+
+### 2. Edge-Compatible Rate Limiting
+
+**Challenge:** Protecting free-tier from abuse while staying budget-friendly
+
+**Solution:** In-memory rate limiter (dev) with Upstash ready (prod)
+- `/api/pastes`: 20 requests per 15 minutes
+- `/api/files`: 10 requests per hour
+- `/api/urls`: 30 requests per hour
+- Returns 429 with `Retry-After` header
+
+**Impact:** Sustainable free-tier, configurable via environment
+
+---
+
+### 3. API Validation & Error Standardization
+
+**Challenge:** Inconsistent validation and error responses across endpoints
+
+**Solution:** Zod schemas for each endpoint
+- `PasteCreateSchema`: validates content, expiration, password
+- `FileUploadSchema`: validates file count, size, types
+- `ShortUrlSchema`: validates URL format and custom codes
+
+**Standard Response Shape:**
+```json
+{
+  "ok": true,
+  "data": { ... },
+  "requestId": "correlation-id"
+}
+```
+
+**Error Shape:**
+```json
+{
+  "ok": false,
+  "code": "VALIDATION_ERROR",
+  "message": "Human readable error",
+  "details": { ... },
+  "requestId": "correlation-id"
+}
+```
+
+---
+
+### 4. Structured Logging & Observability
+
+**Challenge:** No visibility into production issues
+
+**Solution:** Pino logger with correlation IDs
+- Every request gets unique `requestId`
+- Logs include: route, method, status, duration
+- Error logs include stack traces (sanitized)
+- Optional Sentry integration for error tracking
+
+**Log Example:**
+```
+[10:32:45] INFO: Paste created
+  requestId: "550e8400-e29b-41d4"
+  pasteId: "cm123abc"
+  duration: 125ms
+```
+
+---
+
+### 5. OpenAPI Documentation & Swagger UI
+
+**Challenge:** Developers don't know how to use the API
+
+**Solution:** Auto-generated OpenAPI spec + interactive Swagger UI
+- `/api-docs` serves OpenAPI 3.0 JSON
+- `/docs` renders interactive Swagger UI with dark theme
+- All endpoints documented with request/response examples
+- Live testing directly in browser
+
+---
+
+### 6. SEO & Social Previews
+
+**Challenge:** Shared links lack rich previews
+
+**Solution:** Dynamic OG image generation + metadata
+- Vercel OG generates branded social images
+- `/sitemap.xml` for search engines
+- `/robots.txt` to control crawling
+- Canonical links and meta tags
+
+---
+
+### 7. Health Checks & Status Pages
+
+**Challenge:** Can't tell if service is healthy
+
+**Solution:** Public health endpoint and status page
+- `/api/health`: JSON response with DB status, uptime
+- `/status`: Public page showing system health
+- Real-time monitoring with 30-second refresh
+- Graceful degradation if DB is down
+
+---
+
+### 8. Security Hardening
+
+**Challenge:** Vulnerable to XSS, clickjacking, content-type confusion
+
+**Solution:** Multi-layer security approach
+- Content-Security-Policy headers
+- X-Frame-Options: DENY (prevent clickjacking)
+- X-Content-Type-Options: nosniff
+- DOMPurify for markdown rendering
+- No inline event handlers
+
+---
+
+### 9. Frontend Polish & Accessibility
+
+**Challenge:** Poor UX, accessibility issues
+
+**Solution:** User-focused improvements
+- Image lazy-loading (`loading="lazy"`)
+- ARIA labels for form controls
+- Error toasts for API failures
+- Rate limit banner when nearing quota
+- Lighthouse accessibility ≥ 95
+
+---
+
+### 10. API Examples & Documentation
+
+**Challenge:** Developers unsure how to get started
+
+**Solution:** Live code examples page
+- `/examples` with curl, JavaScript, TypeScript snippets
+- Copy-to-clipboard for each example
+- Happy-path use cases: create paste, upload file, shorten URL
+- Linked from navbar navigation
+
+---
+
+### 11. CI/CD Pipeline
+
+**Challenge:** Manual deployments are error-prone
+
+**Solution:** GitHub Actions automation
+- Runs on: pull requests and main branch
+- Steps:
+  - Install dependencies (`pnpm install --frozen-lockfile`)
+  - Lint code (`pnpm lint`)
+  - TypeScript check (`pnpm typecheck`)
+  - Database setup (Prisma migration)
+  - Run tests (`pnpm test`)
+  - Build (`pnpm build`)
+- Build artifacts uploaded for deployment
+- Fails fast on any error
+
+---
+
+### 12. Comprehensive README
+
+**Challenge:** New contributors can't get started quickly
+
+**Solution:** Updated README with:
+- Quick start guide (5 minutes to running locally)
+- Environment variable table with defaults
+- Rate limits and file size limits
+- Security practices overview
+- Deployment instructions for Vercel
+- Contributing guidelines
+
+---
+
+### 13. Testing Suite
+
+**Challenge:** No confidence in code changes
+
+**Solution:** Unit + E2E testing
+- **Unit tests:** Zod schema validation (success/failure cases)
+- **E2E tests:** Playwright for happy-path scenarios
+  - Create paste → retrieve paste
+  - Upload file → download file
+  - Generate short URL → follow redirect
+- Run in CI before merge
+
+---
+
+### 14. Key Learnings
+
+**1. Environment Validation First**
+Catching config issues at build time saves hours of debugging
+
+**2. Rate Limiting = Sustainability**
+Protects free-tier from abuse while enabling growth
+
+**3. Structured Logging = Debuggability**
+RequestId correlation ties everything together
+
+**4. API Docs = Adoption**
+Developers use what they can easily understand
+
+**5. Security Headers = Defense**
+CSP, HSTS, and frame-denial raise the bar significantly
+
+---
+
+## Architecture Overview
+
+```
+User
+  ↓
+HTTP Request
+  ↓
+Rate Limit Middleware (429 if exceeded)
+  ↓
+Input Validation (Zod)
+  ↓
+Logging Middleware (requestId correlation)
+  ↓
+API Handler
+  ↓
+Database (Prisma + PostgreSQL)
+  ↓
+Response (Standardized shape)
+  ↓
+Security Headers
+  ↓
+User
+```
+
+---
+
+## Deployment Checklist
+
+- ✅ Environment validation via `env.ts`
+- ✅ Rate limits enforced and configurable
+- ✅ API docs at `/api-docs` and `/docs`
+- ✅ Health check at `/api/health`
+- ✅ Status page at `/status`
+- ✅ Structured logging with correlation IDs
+- ✅ Security headers (CSP, X-Frame-Options, etc.)
+- ✅ Accessible components (ARIA labels, semantic HTML)
+- ✅ API examples at `/examples`
+- ✅ CI/CD pipeline in GitHub Actions
+- ✅ Unit and E2E tests
+- ✅ README with quick start
+
+---
+
+## What's Next?
+
+**Future Enhancements:**
+1. User accounts and personal history
+2. Advanced analytics and insights
+3. Webhooks for custom integrations
+4. Custom domain support
+5. Mobile app (React Native)
+6. Premium tier with higher limits
+
+---
+
+## Live Resources
+
+- **Live App:** [textshare.xyz](https://textshare.xyz)
+- **API Docs:** [textshare.xyz/docs](https://textshare.xyz/docs)
+- **GitHub:** [github.com/omdeshpande09012005/textshare](https://github.com/omdeshpande09012005/textshare)
+- **Status:** [textshare.xyz/status](https://textshare.xyz/status)
+
+---
+
+## Conclusion
+
+Production-readiness isn't one thing—it's 14 things done well. By systematically addressing environment validation, rate limiting, documentation, security, observability, and testing, TextShare is now ready to scale from hundreds to thousands of concurrent users while maintaining reliability and user trust.
+
+The key is shipping iteratively, measuring what matters, and fixing the most impactful issues first.

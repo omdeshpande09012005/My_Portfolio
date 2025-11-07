@@ -2,124 +2,14 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
 import { Award, ExternalLink, BrainCircuit, Users, BarChart3, Star } from 'lucide-react';
+import { certificationsData, certificationCategories, categoryIcons, issuerIconMap } from '../data/certifications';
 
 const Certifications = () => {
-  // --- Data updated to remove the redundant 'color' property ---
-  const certifications = [
-    {
-      id: 1,
-      name: "5-Star Problem Solving, C++ & SQL",
-      issuer: "HackerRank",
-      category: "programming",
-      description: "Achieved 5-star gold badges in C++, SQL, and Problem Solving, demonstrating advanced algorithmic thinking and database proficiency.",
-      skills: ["C++", "SQL", "Algorithms", "Problem Solving"],
-      credentialUrl: "https://www.hackerrank.com/profile/om_deshpande1"
-    },
-    {
-      id: 2,
-      name: "Data Visualization & Dashboards with Excel and Cognos",
-      issuer: "IBM (via edX)",
-      category: "data",
-      description: "Mastered data visualization techniques and built interactive dashboards using industry-standard tools like Excel and IBM Cognos.",
-      skills: ["Data Visualization", "Dashboards", "Excel", "IBM Cognos"],
-      credentialUrl: "https://courses.edx.org/certificates/281522c1f8e8433cb83d0bea050e5228"
-    },
-    {
-      id: 3,
-      name: "Python Certification",
-      issuer: "EdYoda Digital University",
-      category: "programming",
-      description: "Completed a comprehensive Python course covering core concepts, data structures, and object-oriented programming.",
-      skills: ["Python", "OOP", "Data Structures", "Algorithms"],
-      credentialUrl: "https://edyodalms.s3.amazonaws.com/files/certificates/Om_Deshpande_achivement_Python_Certification_18253_Qr_code_.png"
-    },
-    {
-      id: 4,
-      name: "Critical Thinking & Problem Solving",
-      issuer: "RIT (via edX)",
-      category: "communication",
-      description: "Developed structured approaches to analyze complex problems and formulate effective, logical solutions.",
-      skills: ["Critical Thinking", "Analytical Skills", "Decision Making"],
-      credentialUrl: "https://courses.edx.org/certificates/4de80a0439c44fd58a6f77dc08833878"
-    },
-    {
-      id: 5,
-      name: "Teamwork & Collaboration",
-      issuer: "RIT (via edX)",
-      category: "communication",
-      description: "Learned and applied best practices for effective teamwork, communication, and conflict resolution in a professional setting.",
-      skills: ["Collaboration", "Teamwork", "Communication"],
-      credentialUrl: "https://courses.edx.org/certificates/2a8ddabddf4241778900235356d2a63d"
-    },
-    {
-      id: 6,
-      name: "Excel for Beginners",
-      issuer: "Great Learning",
-      category: "tools",
-      description: "Gained foundational skills in Microsoft Excel for data organization, calculation, and basic analysis.",
-      skills: ["Microsoft Excel", "Data Entry", "Formulas"],
-      credentialUrl: "https://www.mygreatlearning.com/certificate/VNVUOHFW"
-    },
-    {
-      id: 7,
-      name: "Job Focussed Professional Communication",
-      issuer: "EdYoda Digital University",
-      category: "communication",
-      description: "Enhanced professional communication skills for workplace success, focusing on clarity, conciseness, and impact.",
-      skills: ["Communication", "Presentation", "Professionalism"],
-      credentialUrl: "https://edyodalms.s3.amazonaws.com/files/certificates/Om_Deshpande_achivement_Job_Focussed_Professional_Communication_Certification_15271_Qr_code_.png"
-    },
-    {
-      id: 8,
-      name: "Introduction to Personal Financial Planning",
-      issuer: "Indiana University (via edX)",
-      category: "professional",
-      description: "Acquired foundational knowledge in financial planning, budgeting, and investment principles.",
-      skills: ["Financial Literacy", "Budgeting", "Planning"],
-      credentialUrl: "https://courses.edx.org/certificates/87a43deec69b4c6dba494a50bc9b87a7"
-    },
-    {
-      id: 9,
-      name: "Measuring Sustainable Development",
-      issuer: "SDG Academy (via edX)",
-      category: "professional",
-      description: "Learned to measure and track progress towards the Sustainable Development Goals (SDGs) using key indicators.",
-      skills: ["Sustainable Development", "Data Analysis", "Metrics"],
-      credentialUrl: "https://courses.edx.org/certificates/2ae2e6142b15478e84762257572da0da"
-    },
-    {
-      id: 10,
-      name: "Introduction to Social-Emotional Learning (SEL)",
-      issuer: "UCR (via edX)",
-      category: "communication",
-      description: "Gained an understanding of the core competencies of social-emotional learning and its impact on personal and professional growth.",
-      skills: ["Emotional Intelligence", "Self-awareness", "Empathy"],
-      credentialUrl: "https://courses.edx.org/certificates/acdbe12f379b4f8e9271908f62808a29"
-    }
-  ];
-
-  const categories = [
-    { id: 'all', label: 'All', count: certifications.length },
-    { id: 'programming', label: 'Programming', count: certifications.filter(c => c.category === 'programming').length },
-    { id: 'data', label: 'Data & Analytics', count: certifications.filter(c => c.category === 'data').length },
-    { id: 'tools', label: 'Tools', count: certifications.filter(c => c.category === 'tools').length },
-    { id: 'communication', label: 'Soft Skills', count: certifications.filter(c => c.category === 'communication').length },
-    { id: 'professional', label: 'Professional Dev.', count: certifications.filter(c => c.category === 'professional').length },
-  ];
-
   const [selectedCategory, setSelectedCategory] = React.useState('all');
 
   const filteredCertifications = selectedCategory === 'all'
-    ? certifications
-    : certifications.filter(cert => cert.category === selectedCategory);
-
-  const categoryIcons = {
-    programming: Star,
-    data: BarChart3,
-    tools: Award,
-    communication: Users,
-    professional: BrainCircuit
-  };
+    ? certificationsData
+    : certificationsData.filter(cert => cert.category === selectedCategory);
 
   return (
     <section id="certifications" className="py-20 relative">
@@ -134,7 +24,7 @@ const Certifications = () => {
         </AnimatedSection>
 
         <AnimatedSection className="flex flex-wrap justify-center gap-3 mb-12" animation="fadeInUp" delay={0.2}>
-          {categories.map((category) => (
+          {certificationCategories.map((category) => (
             <motion.button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
@@ -157,7 +47,12 @@ const Certifications = () => {
         <div className="grid md:grid-cols-2 gap-8">
           <AnimatePresence>
             {filteredCertifications.map((cert, index) => {
-              const Icon = categoryIcons[cert.category] || Award;
+              const categoryIcon = categoryIcons[cert.category] || Award;
+              const issuerMeta = issuerIconMap[cert.issuer];
+              const issuerIcon = issuerMeta?.icon || categoryIcon;
+              const bgColor = issuerMeta?.bgColor || 'bg-gradient-to-br from-primary-500 to-secondary-600';
+              const iconColor = issuerMeta ? 'text-inherit' : 'text-white';
+              
               return (
                 <motion.div
                   key={cert.id}
@@ -170,8 +65,12 @@ const Certifications = () => {
                 >
                   <div className="relative z-10 flex-grow flex flex-col">
                     <div className="flex items-start gap-4 mb-4">
-                      <div className="p-3 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl text-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                        <Icon className="text-white" />
+                      <div className={`p-3 ${issuerMeta ? issuerMeta.bgColor : 'bg-gradient-to-br from-primary-500 to-secondary-600'} rounded-xl text-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center w-16 h-16`}>
+                        {issuerMeta?.logo ? (
+                          <img src={issuerMeta.logo} alt={cert.issuer} className="w-12 h-12 object-contain" />
+                        ) : (
+                          React.createElement(issuerIcon, { className: issuerMeta ? issuerMeta.textColor : 'text-white', size: 32 })
+                        )}
                       </div>
                       <div className="flex-1">
                         <h3 className="text-lg sm:text-xl font-display font-bold text-white mb-1">
@@ -189,7 +88,7 @@ const Certifications = () => {
                         {cert.skills.map((skill) => (
                           <span
                             key={skill}
-                            className="px-3 py-1 bg-amber-500/10 border border-amber-400/30 rounded-full text-zinc-200 text-xs"
+                            className="px-3 py-1 bg-primary-500/10 border border-primary-400/30 rounded-full text-zinc-200 text-xs"
                           >
                             {skill}
                           </span>
@@ -211,7 +110,7 @@ const Certifications = () => {
                     )}
                   </div>
                 </motion.div>
-              )
+              );
             })}
           </AnimatePresence>
         </div>

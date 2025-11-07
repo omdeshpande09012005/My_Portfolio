@@ -2,15 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-/* --- NEW THEME: CHARCOAL & AMBER --- */
+/* --- NEW THEME: CHARCOAL & PURPLE --- */
 
 @layer base {
-  html { 
-    scroll-behavior: smooth; 
+  html {
+    scroll-behavior: smooth;
   }
-  /* 1. Changed to a deep charcoal background with light text */
+
   body {
     @apply font-sans text-zinc-200 bg-zinc-900 min-h-screen;
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.03) 0%, transparent 50%);
+  }
+
+  /* Custom animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6), 0 0 60px rgba(168, 85, 247, 0.4); }
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+      transform: scale(1);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes text-shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s infinite;
+  }
+
+  .animate-text-shimmer {
+    animation: text-shimmer 3s ease-in-out infinite;
+    background-size: 200% 200%;
   }
 }
 
@@ -19,13 +76,13 @@
   .glass {
     @apply bg-zinc-800/50 border border-zinc-700 rounded-xl shadow-lg;
   }
-  /* 3. Updated all gradients to the new amber/orange accent color */
+  /* 3. Updated all gradients to the new purple/violet accent color */
   .gradient-text {
-    @apply bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-400 to-secondary-500 bg-clip-text text-transparent;
   }
   .btn-primary {
-    @apply bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-lg
-      hover:from-amber-600 hover:to-orange-700 transition-all transform hover:scale-105 duration-300 shadow-lg hover:shadow-amber-500/20;
+    @apply bg-gradient-to-r from-primary-500 to-secondary-600 text-white px-6 py-3 rounded-lg
+      hover:from-primary-600 hover:to-secondary-700 transition-all transform hover:scale-105 duration-300 shadow-lg hover:shadow-primary-500/20;
   }
   .btn-secondary {
     @apply bg-zinc-800 text-white px-6 py-3 rounded-lg border border-zinc-700
@@ -48,25 +105,25 @@
   
   /* Gradient backgrounds */
   .gradient-bg-primary {
-    @apply bg-gradient-to-r from-amber-500 to-orange-500;
+    @apply bg-gradient-to-r from-primary-500 to-secondary-500;
   }
   
   .gradient-bg-accent {
-    @apply bg-gradient-to-r from-orange-500 to-amber-500;
+    @apply bg-gradient-to-r from-secondary-500 to-primary-500;
   }
   
   /* Text gradients */
   .text-gradient-primary {
-    @apply bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent;
   }
   
   .text-gradient-accent {
-    @apply bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-secondary-400 to-primary-400 bg-clip-text text-transparent;
   }
   
   /* Border gradients */
   .border-gradient-primary {
-    @apply border border-transparent bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-border;
+    @apply border border-transparent bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-border;
   }
   
   /* Hover effects */
@@ -75,7 +132,7 @@
   }
   
   .hover-glow {
-    @apply transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20;
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/20;
   }
   
   /* Animation utilities */
@@ -94,7 +151,7 @@
   /* 4. Updated custom scrollbar to match new accent color */
   .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: rgba(245, 158, 11, 0.5) transparent; /* Amber color */
+    scrollbar-color: rgba(139, 92, 246, 0.5) transparent; /* Purple color */
   }
   
   .custom-scrollbar::-webkit-scrollbar {
@@ -106,12 +163,12 @@
   }
   
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(245, 158, 11, 0.5); /* Amber color */
+    background: rgba(139, 92, 246, 0.5); /* Purple color */
     border-radius: 3px;
   }
   
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(245, 158, 11, 0.7); /* Lighter amber */
+    background: rgba(139, 92, 246, 0.7); /* Lighter purple */
   }
 }
 
@@ -121,13 +178,13 @@
 }
 
 .gradient-mesh-1 {
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.2) 0%, transparent 70%); /* Orange */
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%); /* Purple */
   top: -200px;
   left: -200px;
 }
 
 .gradient-mesh-2 {
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%); /* Amber */
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%); /* Violet */
   top: 50%;
   right: -300px;
 }
@@ -222,5 +279,5 @@
 
 /* Focus styles updated for new theme */
 .focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-zinc-900;
+  @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-zinc-900;
 }

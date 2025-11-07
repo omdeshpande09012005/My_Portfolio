@@ -1,0 +1,19 @@
+<!-- Blog Cover Placeholder Images -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Blog Cover Images - Placeholders</title>
+</head>
+<body>
+<p>Blog cover images should be placed in: /public/images/blog/</p>
+<p>Required images:</p>
+<ul>
+  <li>textshare-cover.jpg (1200x630px recommended)</li>
+  <li>gameai-cover.jpg (1200x630px recommended)</li>
+  <li>gitex-cover.jpg (1200x630px recommended)</li>
+</ul>
+<p>For now, the images will fall back to the default if not found.</p>
+</body>
+</html>
