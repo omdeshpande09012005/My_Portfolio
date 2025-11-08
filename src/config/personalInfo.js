@@ -24,6 +24,7 @@ export const personalInfo = {
     institution: "MIT World Peace University, Pune",
     year: "2023-2027",
     gpa: "8.75/10.0 (3.5/4.0)",
+    semesterGpa: "9.36/10.0 (3.74/4.0)",
     location: "Pune, India"
   },
 

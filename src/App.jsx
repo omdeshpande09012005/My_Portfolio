@@ -12,7 +12,6 @@ import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Certifications from './components/Certifications';
 import Blogs from './components/Blogs';
-import Coursework from './components/Coursework';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Post from './components/Post';
@@ -63,7 +62,6 @@ const HomePage = () => {
       <About />
       <Skills />
       <Education />
-      <Coursework />
       <Projects />
       <Experience />
       <Certifications />

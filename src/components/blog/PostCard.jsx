@@ -16,7 +16,7 @@ export const PostCard = ({ post, onTagClick }) => {
       className="group relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 transition-all duration-300 hover:shadow-lg dark:hover:shadow-2xl hover:shadow-primary-500/20 hover:-translate-y-1"
     >
       {/* Cover Image */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-primary-500/20 to-accent-500/20 h-48">
+      <div className="relative overflow-hidden bg-gradient-to-br from-primary-500/20 to-accent-500/20" style={{ height: '400px' }}>
         <img
           src={coverImage}
           alt={title}

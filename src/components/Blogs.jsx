@@ -19,20 +19,19 @@ const Blogs = () => {
   };
 
   return (
-    <>
-      {/* Blogs Section */}
-      <div id="blog" className="mt-16 pt-16 border-t border-zinc-700">
+    <section id="blog" className="py-20 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="text-center mb-12"
         >
-          <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3">
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
             Latest <span className="gradient-text">Articles</span>
-          </h3>
-          <p className="text-zinc-400 text-sm max-w-2xl">
+          </h2>
+          <p className="text-xl text-zinc-400 max-w-3xl mx-auto">
             Insights from my projects and technical explorations.
           </p>
         </motion.div>
@@ -51,7 +50,7 @@ const Blogs = () => {
             <p className="text-zinc-400">No blog posts found.</p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-3 gap-6">
             {blogsToDisplay.map((blog, index) => (
               <motion.div
                 key={blog.slug}
@@ -132,7 +131,7 @@ const Blogs = () => {
           </div>
         )}
       </div>
-    </>
+    </section>
   );
 };
 

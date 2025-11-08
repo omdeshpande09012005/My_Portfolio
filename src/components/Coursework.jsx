@@ -13,7 +13,7 @@ import {
 import { courseworkData } from '../data/coursework';
 
 const Coursework = () => {
-  const [expandedCourse, setExpandedCourse] = useState('dsa');
+  const [expandedCourse, setExpandedCourse] = useState('ds');
   const [expandedUnit, setExpandedUnit] = useState(null);
   const [expandedLab, setExpandedLab] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
@@ -23,20 +23,18 @@ const Coursework = () => {
   if (!course) return null;
 
   return (
-    <section id="coursework" className="py-20 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <AnimatedSection className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-            Key <span className="gradient-text">Coursework</span>
-          </h2>
-          <p className="text-xl text-zinc-400 max-w-3xl mx-auto">
-            Deep-dive into key courses with detailed syllabus, practical labs, and comprehensive learning resources.
-          </p>
-        </AnimatedSection>
+    <div id="coursework">
+      {/* Section Header */}
+      <div className="text-center mb-12">
+        <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-3">
+          Key <span className="gradient-text">Coursework</span>
+        </h3>
+        <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+          Deep-dive into key courses with detailed syllabus, practical labs, and comprehensive learning resources.
+        </p>
+      </div>
 
-        <AnimatedSection animation="fadeInUp" delay={0.2}>
-          <div className="glass rounded-2xl p-8">
+      <div className="glass rounded-2xl p-8">
             {/* Course Selector */}
             <div className="mb-8 pb-8 border-b border-zinc-700">
               <h3 className="text-lg font-semibold text-white mb-4">Select Course</h3>
@@ -439,9 +437,7 @@ const Coursework = () => {
               </motion.div>
             )}
           </div>
-        </AnimatedSection>
-      </div>
-    </section>
+    </div>
   );
 };
 

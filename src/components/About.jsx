@@ -30,6 +30,7 @@ const About = () => {
       institution: personalInfo.education.institution,
       year: personalInfo.education.year,
       gpa: personalInfo.education.gpa,
+      semesterGpa: personalInfo.education.semesterGpa,
       icon: GraduationCap
     }
   ];
@@ -83,9 +84,14 @@ const About = () => {
                   <div key={index} className="glass rounded-lg p-4">
                     <h5 className="text-white font-semibold">{edu.degree}</h5>
                     <p className="text-zinc-400 text-sm">{edu.institution}</p>
-                    <div className="flex items-center gap-4 mt-2 text-sm">
-                      <span className="text-primary-400">{edu.year}</span>
-                      {edu.gpa && <span className="text-secondary-400">GPA: {edu.gpa}</span>}
+                    <div className="flex flex-col gap-1 mt-2 text-sm">
+                      <div className="flex items-center gap-4">
+                        <span className="text-primary-400">{edu.year}</span>
+                        {edu.gpa && <span className="text-secondary-400">CGPA: {edu.gpa}</span>}
+                      </div>
+                      {edu.semesterGpa && (
+                        <span className="text-primary-400 text-xs ml-0">Latest Semester: {edu.semesterGpa}</span>
+                      )}
                     </div>
                   </div>
                 ))}

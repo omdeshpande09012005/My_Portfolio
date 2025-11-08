@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Download, Eye, Sun, Moon } from 'lucide-react';
-import { useTheme } from '../hooks/useTheme';
+import { Menu, X, Download, Eye } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +9,6 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const { isDark, toggleTheme } = useTheme();
 
   const navItems = useMemo(() => [
     { id: 'hero', label: 'Home', type: 'scroll' },
@@ -152,32 +150,6 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-3">
-            {/* Theme Toggle */}
-            <motion.button
-              onClick={toggleTheme}
-              className="p-2 bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-600 hover:border-primary-400/50 backdrop-blur-sm rounded-lg transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Toggle dark mode"
-              aria-pressed={isDark}
-            >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={isDark ? 'moon' : 'sun'}
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {isDark ? (
-                    <Sun size={18} className="text-yellow-400" />
-                  ) : (
-                    <Moon size={18} className="text-blue-400" />
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </motion.button>
-            
             <motion.a
               href={resumeUrl}
               target="_blank"

@@ -39,10 +39,12 @@ export const usePosts = () => {
     const loadData = async () => {
       try {
         setLoading(true);
+        
         const [allPosts, allTags] = await Promise.all([
           getAllPosts(),
           getAllTags(),
         ]);
+        
         setPosts(allPosts);
         setTags(allTags);
         setCache({ allPosts, allTags });

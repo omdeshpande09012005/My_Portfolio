@@ -255,9 +255,9 @@ export const Post = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="lg:col-span-3 prose dark:prose-invert max-w-none"
           >
-            {/* Render markdown content using component */}
-            {post.content ? (
-              <MarkdownRenderer content={post.content} />
+            {/* Render MDX component directly */}
+            {post.Component ? (
+              <post.Component />
             ) : (
               <p className="text-gray-600 dark:text-gray-400">Unable to render post content</p>
             )}

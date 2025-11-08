@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
 import { GraduationCap, Calendar, MapPin, Award } from 'lucide-react';
 import { personalInfo } from '../config/personalInfo';
+import Coursework from './Coursework';
 
 // --- IMPORT YOUR COLLEGE LOGO HERE ---
 import mitwpuLogo from '../assets/logos/mitwpu-logo.png';
@@ -15,6 +16,7 @@ const Education = () => {
       institution: personalInfo.education.institution,
       year: personalInfo.education.year,
       gpa: personalInfo.education.gpa,
+      semesterGpa: personalInfo.education.semesterGpa,
       location: personalInfo.education.location,
       description: "Pursuing a comprehensive Computer Science curriculum covering programming fundamentals, data structures, algorithms, and modern software development practices.",
       logo: mitwpuLogo
@@ -68,15 +70,31 @@ const Education = () => {
                   <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-4 text-zinc-400">
                     <div className="flex items-center gap-2"><Calendar size={16} /><span>{edu.year}</span></div>
                     <div className="flex items-center gap-2"><MapPin size={16} /><span>{edu.location}</span></div>
-                    {edu.gpa && <div className="flex items-center gap-2"><Award size={16} /><span className="text-secondary-400 font-medium">GPA: {edu.gpa}</span></div>}
+                    {edu.gpa && (
+                      <div className="flex flex-col gap-1">
+                        <div className="flex items-center gap-2">
+                          <Award size={16} />
+                          <span className="text-secondary-400 font-medium">CGPA: {edu.gpa}</span>
+                        </div>
+                        {edu.semesterGpa && (
+                          <div className="flex items-center gap-2 ml-6">
+                            <span className="text-primary-400 font-medium text-sm">Latest Semester: {edu.semesterGpa}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <p className="text-zinc-300 leading-relaxed">{edu.description}</p>
                 </div>
               </div>
-
             </div>
           </AnimatedSection>
         ))}
+
+        {/* Key Coursework - Integrated directly below Education */}
+        <div className="mt-12">
+          <Coursework />
+        </div>
       </div>
     </section>
   );

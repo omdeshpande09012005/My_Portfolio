@@ -46,6 +46,7 @@ export const technicalSkillsData = [
       { name: 'Tailwind CSS', proficiency: 'Advanced', iconText: 'T', logo: tailwindLogo },
       { name: 'HTML5', proficiency: 'Advanced', iconText: 'H5', logo: htmlLogo },
       { name: 'CSS3', proficiency: 'Advanced', iconText: 'C3', logo: cssLogo },
+      { name: 'SFML', proficiency: 'Intermediate', iconText: 'SF', logo: null },
     ]
   },
   {
@@ -64,7 +65,11 @@ export const technicalSkillsData = [
       { name: 'Azure', proficiency: 'Intermediate', iconText: 'AZ', logo: azureLogo },
       { name: 'Google Cloud', proficiency: 'Intermediate', iconText: 'GC', logo: googleCloudLogo },
       { name: 'GitHub Actions', proficiency: 'Proficient', iconText: 'GH', logo: githubLogo },
+      { name: 'CI/CD Pipeline', proficiency: 'Proficient', iconText: 'CI', logo: null },
       { name: 'Docker', proficiency: 'Intermediate', iconText: 'D', logo: null },
+      { name: 'Kubernetes', proficiency: 'Intermediate', iconText: 'K8s', logo: null },
+      { name: 'Grafana', proficiency: 'Intermediate', iconText: 'GF', logo: null },
+      { name: 'Prometheus', proficiency: 'Intermediate', iconText: 'PM', logo: null },
       { name: 'Vercel', proficiency: 'Advanced', iconText: 'V', logo: null },
     ]
   },
@@ -107,6 +112,7 @@ export const softSkillsData = [
   'System Optimization',
   'Technical Communication',
   'Team Collaboration',
+  'Agile Development',
   'Adaptability',
   'Attention to Detail',
 ];
